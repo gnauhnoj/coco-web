@@ -1,6 +1,6 @@
 // /* Controllers */
 
-var IndexController = function($scope, dataStore) {
+var IndexController = function($scope, $route, dataStore) {
     // update this shit when i array this
     // dataStore.currentImg = data.file_name;
     // dataStore.currentData = data;
@@ -80,6 +80,13 @@ var IndexController = function($scope, dataStore) {
         // console.log(_img.width, _img.height);
     };
     newImg.src = dataStore.currentImg;
+
+    // TODO: this is hacked for now - need to change to a link etc with questions
+    $scope.next = function() {
+      dataStore.next();
+      console.log(dataStore);
+      $route.reload();
+    };
 };
 
 var dateIfy = function(arr) {

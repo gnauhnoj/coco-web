@@ -8,11 +8,13 @@ angular.module('angularFlaskServices', ['ngResource'])
     var dataStore = this;
 
     this.init = function() {
+      console.log('initing');
       var deferred = $q.defer();
       require(['json!./static/img/test.json'], function(data) {
+        dataStore.data = data;
         dataStore.currentIndex = 0;
-        dataStore.currentImg = '/static/img/' + data[dataStore.currentIndex].file_name;
-        dataStore.currentData = data[dataStore.currentIndex];
+        dataStore.currentImg = '/static/img/' + dataStore.data[dataStore.currentIndex].file_name;
+        dataStore.currentData = dataStore.data[dataStore.currentIndex];
         deferred.resolve('Done');
       });
       return deferred.promise;
@@ -20,8 +22,8 @@ angular.module('angularFlaskServices', ['ngResource'])
 
     this.next = function() {
       dataStore.currentIndex++;
-      dataStore.currentImg = '/static/img/' + data[dataStore.currentIndex].file_name;
-      dataStore.currentData = data[dataStore.currentIndex];
+      dataStore.currentImg = '/static/img/' + dataStore.data[dataStore.currentIndex].file_name;
+      dataStore.currentData = dataStore.data[dataStore.currentIndex];
     };
 
   });

@@ -6,6 +6,8 @@ require.config({
     }
 });
 
+var init = false;
+
 angular.module('AngularFlask', ['ngRoute', 'angularFlaskServices', 'angularFlaskFilters'])
 .config([
 	'$routeProvider', '$locationProvider',
@@ -16,7 +18,10 @@ angular.module('AngularFlask', ['ngRoute', 'angularFlaskServices', 'angularFlask
 		controller: IndexController,
     resolve: {
       data: function (dataStore) {
-        return dataStore.init();
+        if (!init) {
+          init = true;
+          return dataStore.init();
+        }
       }
     }
 	})
