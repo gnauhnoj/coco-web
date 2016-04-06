@@ -58,7 +58,7 @@ var IndexController = function($scope, dataStore) {
         for (var i=0; i<segmentation.length; i++) {
           // console.log(segmentation[i]);
           newElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-          newElement.setAttribute('role', 'img-label');
+          newElement.setAttribute('role', 'img');
           var svg_id = 'svg-' + i;
           newElement.setAttribute('id', svg_id);
           newElement.setAttribute('aria-label', segmentation[i].category_name);
