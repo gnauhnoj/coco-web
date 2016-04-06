@@ -1,13 +1,13 @@
 // /* Controllers */
 
 var IndexController = function($scope, dataStore) {
-  require(['json!/static/img/test.json'], function(data) {
     // update this shit when i array this
-    dataStore.currentImg = data.file_name;
-    dataStore.currentData = data;
-    var segmentation = data.segmentation;
+    // dataStore.currentImg = data.file_name;
+    // dataStore.currentData = data;
+    console.log(dataStore.currentData);
+    var segmentation = dataStore.currentData.segmentation;
     var w = document.documentElement.clientWidth;
-    var h = document.documentElement.clientHeight;
+    var h = document.documentElement.clientHeight * 0.75;
 
     // console.log(dataStore.currentImg);
     // console.log(dataStore.currentData);
@@ -24,6 +24,8 @@ var IndexController = function($scope, dataStore) {
         var width = newImg.width;
         var scale_x = w / width;
         var scale_y = h / height;
+
+        // TODO: I could probably refactor this to be true/false instead
         var dim = (width > height) ? 'x' : 'y';
         var scale;
 
@@ -37,10 +39,6 @@ var IndexController = function($scope, dataStore) {
           _img.width = width * scale;
           _img.height = h;
         }
-
-        // console.log(_img.width, _img.height);
-        // _img.width = w;
-        // _img.height = height * scale_x;
 
         console.log(_img.width, _img.height);
 
@@ -76,15 +74,12 @@ var IndexController = function($scope, dataStore) {
             pointStr.push(newy);
           }
           pointStr = pointStr.join(' ');
-          // console.log(pointStr);
           newElement.setAttribute('points', pointStr);
           sub_svg.appendChild(newElement);
-          // console.log(pointStr);
         }
         // console.log(_img.width, _img.height);
     };
-    newImg.src = '/static/img/' + dataStore.currentImg;
-  });
+    newImg.src = dataStore.currentImg;
 };
 
 var dateIfy = function(arr) {

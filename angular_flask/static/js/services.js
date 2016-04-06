@@ -1,25 +1,29 @@
 angular.module('angularFlaskServices', ['ngResource'])
-  // .factory('getGraphData', function($resource) {
-  //   return $resource('/api/graphdata', {}, {
-  //     retrieve: {
-  //       method: 'POST',
-  //     },
-  //     get: {
-  //       method: 'GET'
-  //     }
-  //   });
-  // })
-  // .factory('getReccData', function($resource) {
-  //   return $resource('/api/reccdata', {}, {
-  //     get: {
-  //       method: 'GET'
-  //     }
-  //   });
-  // })
-  .service('dataStore', function($rootScope) {
-    this.currentImg = undefined;
-    this.currentData = undefined;
-    this.currentIndex = 0;
+  .service('dataStore', function($rootScope, $q) {
+    this.data = null;
+    this.currentImg = null;
+    this.currentData = null;
+    this.currentIndex = null;
+
+    var dataStore = this;
+
+    this.init = function() {
+      var deferred = $q.defer();
+      require(['json!./static/img/test.json'], function(data) {
+        dataStore.currentIndex = 0;
+        dataStore.currentImg = '/static/img/' + data[dataStore.currentIndex].file_name;
+        dataStore.currentData = data[dataStore.currentIndex];
+        deferred.resolve('Done');
+      });
+      return deferred.promise;
+    };
+
+    this.next = function() {
+      dataStore.currentIndex++;
+      dataStore.currentImg = '/static/img/' + data[dataStore.currentIndex].file_name;
+      dataStore.currentData = data[dataStore.currentIndex];
+    };
+
   });
 
 // angular.module('dataServices', [])
