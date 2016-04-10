@@ -12,9 +12,6 @@ from angular_flask.models import *
 
 # routing for basic pages (pass routing onto the Angular app)
 @app.route('/')
-# @app.route('/graphs')
-# @app.route('/analysis')
-# @app.route('/recommendations')
 def basic_pages(**kwargs):
     return make_response(open('angular_flask/templates/index.html').read())
 

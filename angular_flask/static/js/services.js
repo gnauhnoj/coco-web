@@ -1,8 +1,11 @@
 angular.module('angularFlaskServices', ['ngResource'])
   .service('dataStore', function($rootScope, $q) {
-    this.data = null;
+    this.images = null;
+    this.captions = null;
+
     this.currentImg = null;
     this.currentData = null;
+    this.currentCaption = null;
     this.currentIndex = null;
 
     var dataStore = this;
@@ -10,11 +13,15 @@ angular.module('angularFlaskServices', ['ngResource'])
     this.init = function() {
       console.log('initing');
       var deferred = $q.defer();
-      require(['json!./static/img/test.json'], function(data) {
-        dataStore.data = data;
+      require(['json!./static/img/images.json', 'json!./static/img/captions.json'], function(images, captions) {
+        dataStore.images = images;
+        dataStore.captions = captions;
         dataStore.currentIndex = 0;
-        dataStore.currentImg = '/static/img/' + dataStore.data[dataStore.currentIndex].file_name;
-        dataStore.currentData = dataStore.data[dataStore.currentIndex];
+
+        // TODO: this is def unnecessary...
+        dataStore.currentImg = '/static/img/' + dataStore.images[dataStore.currentIndex].file_name;
+        dataStore.currentData = dataStore.images[dataStore.currentIndex];
+        dataStore.currentCaption = dataStore.captions[dataStore.currentIndex];
         deferred.resolve('Done');
       });
       return deferred.promise;
@@ -22,21 +29,8 @@ angular.module('angularFlaskServices', ['ngResource'])
 
     this.next = function() {
       dataStore.currentIndex++;
-      dataStore.currentImg = '/static/img/' + dataStore.data[dataStore.currentIndex].file_name;
-      dataStore.currentData = dataStore.data[dataStore.currentIndex];
+      dataStore.currentImg = '/static/img/' + dataStore.images[dataStore.currentIndex].file_name;
+      dataStore.currentData = dataStore.images[dataStore.currentIndex];
+      dataStore.currentCaption = dataStore.captions[dataStore.currentIndex];
     };
-
   });
-
-// angular.module('dataServices', [])
-//   .service('dataStore', function($rootScope, getGraphData) {
-//     this.uploadData = {};
-//     this.storedData = undefined;
-
-//     this.storeAllData = function(dataStore, cb) {
-//       getGraphData.get(this.uploadData, function(data) {
-//         dataStore.storedData = data;
-//         cb(data);
-//       });
-//     };
-// });

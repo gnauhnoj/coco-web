@@ -1,3 +1,10 @@
-body {
+body, #img-area {
   margin: 0;
+}
+
+#obj-button, #next-button {
+}
+
+#grid, #grid2 {
+  padding: 0;
 }
