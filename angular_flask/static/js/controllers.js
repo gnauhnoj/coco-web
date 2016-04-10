@@ -1,16 +1,44 @@
 // /* Controllers */
 
-var IndexController = function($scope, $location) {
+var shuffleArray = function(array) {
+  var m = array.length, t, i;
+
+  // While there remain elements to shuffle
+  while (m) {
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+
+  return array;
+};
+
+var IndexController = function($scope, $location, dataStore) {
   $scope.go = function() {
     $location.path('/image');
   };
 };
 
-var QuizController = function($scope, $location, dataStore) {
-  $scope.next = function() {
+var EndController = function($scope) {
+};
+
+var QuizController = function($scope, dataStore) {
+  var quizOptions = dataStore.currentCaptions;
+  quizOptions = shuffleArray(quizOptions);
+
+  $scope.captions = quizOptions.map(function(op) {
+    return op[0].caption;
+  });
+
+  // console.log($scope.captions);
+  $scope.next = function(index) {
+    var quizResult = quizOptions[index];
+    dataStore.results[dataStore.currentIndex] = quizResult;
     dataStore.next();
-    // $route.reload();
-    $location.path('/image');
   };
 };
 
@@ -97,8 +125,8 @@ var ImageController = function($scope, $location, dataStore) {
 
     var button = document.createElement('div');
     // TODO: figure out how to deal with annoying text...
-    // var textNode = document.createTextNode('All Objects');
-    // button.appendChild(textNode);
+    var textNode = document.createTextNode('Hover for All Objects');
+    button.appendChild(textNode);
     button.className = 'mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-cell mdl-cell--12-col';
     button.setAttribute('aria-label', categoryStr);
     button.id = 'obj-button';

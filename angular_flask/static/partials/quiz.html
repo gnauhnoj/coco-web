@@ -1,4 +1,8 @@
-Quiz
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"ng-click="next()">
-  Start
-</button>
+<div id= "grid" class="mdl-grid">
+  <div ng-repeat="cap in captions" class="mdl-cell mdl-cell--12-col">
+    <h6 aria-labelledby="Option"> Option {{$index + 1}} </h6>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-cell mdl-cell--12-col" ng-click="next($index)">
+      {{cap}}
+    </button>
+  </div>
+<div>

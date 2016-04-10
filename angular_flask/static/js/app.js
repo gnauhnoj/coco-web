@@ -31,6 +31,10 @@ angular.module('AngularFlask', ['ngRoute', 'angularFlaskServices', 'angularFlask
     templateUrl: 'static/partials/quiz.html',
     controller: QuizController
   })
+  .when('/end', {
+    templateUrl: 'static/partials/end.html',
+    controller: EndController
+  })
   .otherwise({
     redirectTo: '/'
   });
