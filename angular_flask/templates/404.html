@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Palpiction - Web</title>
+	<title>Palpiction</title>
   <link rel="stylesheet" href="/static/css/main.css">
   <link rel="stylesheet" href="/static/lib/bower_components/mdl/material.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -16,22 +16,24 @@
                   mdl-layout--fixed-tabs">
         <header class="mdl-layout__header">
           <div class="mdl-layout__header-row">
-            <!-- Title -->
-            <span class="mdl-layout-title">Palpiction Web</span>
+            <span class="mdl-layout-title">Palpiction</span>
           </div>
         </header>
       </div>
 
-      <div class=" mdl-container mdl-grid">
-        <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+      <div class="mdl-container mdl-grid">
+        <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp mdl-cell--12-col section--center">
           <div class="mdl-card mdl-cell mdl-cell--12-col section--center">
+            <div class="mdl-card__title">
+              <h2 class="mdl-card__title-text" role="alert">Error!</h2>
+            </div>
             <div class="mdl-card__supporting-text">
-            <h4 role="alert">Error!</h4>
-            <h5 role="alert">You refreshed the page or navigated to a page that doesn't exist.</h5>
+              <h6 role="alert">You refreshed the page or navigated to a page that doesn't exist. Click the button below to start over.</h6>
+            </div>
             <div class="mdl-card__actions">
-                <a href="/" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color-text--accent-contrast">
-                  Start Over
-                </a>
+               <a href="/" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color-text--accent-contrast mdl-cell mdl-cell--12-col section--center">
+                 Start Over
+               </a>
             </div>
           </div>
         </section>
