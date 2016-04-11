@@ -16,9 +16,12 @@
       </div>
       <div class="mdl-card__actions">
         <div ng-repeat="cap in captions">
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-cell mdl-cell--12-col" ng-click="next($index)">
+<!--           <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-cell mdl-cell--12-col" ng-click="next($index)">
             Option {{$index + 1}}: {{cap}}
-          </button>
+          </button> -->
+          <a class="large expanded button" ng-click="next($index)">
+            Option {{$index + 1}}: {{cap}}
+          </a>
         </div>
       </div>
     </div>
