@@ -18,6 +18,6 @@ body, #img-area {
 .mdl-card__title {
   max-height: 50vh;
 }
-#quiz-q h2 {
+#middle-text h2, #quiz-q h2 {
   font-size: 10vmax;
 }

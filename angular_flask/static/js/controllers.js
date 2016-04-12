@@ -1,25 +1,14 @@
 // /* Controllers */
 
-var shuffleArray = function(array) {
-  var m = array.length, t, i;
-
-  // While there remain elements to shuffle
-  while (m) {
-    // Pick a remaining element…
-    i = Math.floor(Math.random() * m--);
-
-    // And swap it with the current element.
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
-  }
-
-  return array;
-};
-
 var IndexController = function($scope, $location, dataStore) {
   $scope.go = function() {
     $location.path('/image');
+  };
+};
+
+var MiddleController = function($scope, $location) {
+  $scope.next = function() {
+    $location.path('/quiz');
   };
 };
 
@@ -29,7 +18,7 @@ var EndController = function($scope) {
 var QuizController = function($scope, dataStore, $document) {
   $scope.myText='<b><emph>Select 1 of the 3 captions below by pressing the button belonging to the caption that best describes the image you just explored.</b></emph>';
   var quizOptions = dataStore.currentCaptions;
-  quizOptions = shuffleArray(quizOptions);
+  quizOptions = dataStore.shuffleArray(quizOptions);
 
   $scope.captions = quizOptions.map(function(op) {
     return op[0].caption;
@@ -139,6 +128,6 @@ var ImageController = function($scope, $location, dataStore) {
 
   // TODO: this is hacked for now - need to change to a link etc with questions
   $scope.next = function() {
-    $location.path('/quiz');
+    $location.path('/middle');
   };
 };

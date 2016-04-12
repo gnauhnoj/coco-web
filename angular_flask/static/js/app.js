@@ -27,6 +27,10 @@ angular.module('AngularFlask', ['ngRoute', 'angularFlaskServices', 'angularFlask
     templateUrl: 'static/partials/image.html',
     controller: ImageController
   })
+  .when('/middle', {
+    templateUrl: 'static/partials/middle.html',
+    controller: MiddleController
+  })
   .when('/quiz', {
     templateUrl: 'static/partials/quiz.html',
     controller: QuizController

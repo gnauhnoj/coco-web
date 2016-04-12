@@ -1,0 +1,22 @@
+<div class="mdl-container mdl-grid">
+  <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp mdl-cell--12-col section--center">
+    <div class="mdl-card mdl-cell mdl-cell--12-col section--center">
+      <div id="middle-text" class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Please pause and describe the image you just explored to your experimenter.</h2>
+      </div>
+      <div class="mdl-card__actions">
+        <a href="#" class="large expanded button" ng-click="next()">
+          Next
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="text/javascript">
+$(function() {
+    while( $('#middle-text h2').height() > $('.mdl-card__title').height() ) {
+      $('#middle-text h2').css('font-size', (parseInt($('#middle-text h2').css('font-size')) - 1) + "px" );
+    }
+});
+</script>

@@ -47,6 +47,9 @@ def record():
             score += 1
         data[trial].append(correct)
 
+    if len(data) > 3:
+        score -= 3
+
     r['result'] = data
     r['score'] = score
 
