@@ -26,7 +26,8 @@ var IndexController = function($scope, $location, dataStore) {
 var EndController = function($scope) {
 };
 
-var QuizController = function($scope, dataStore) {
+var QuizController = function($scope, dataStore, $document) {
+  $scope.myText='<b><emph>Select 1 of the 3 captions below by pressing the button belonging to the caption that best describes the image you just explored.</b></emph>';
   var quizOptions = dataStore.currentCaptions;
   quizOptions = shuffleArray(quizOptions);
 
@@ -64,8 +65,9 @@ var ImageController = function($scope, $location, dataStore) {
     var scale_y = h / height;
 
     // if it's taller than it is wide, warp it otherwise just fit to width
-    scale_y = (height > width) ? scale_y : scale_x;
-    _img.height = (height > width) ? h : height * scale_y;
+    // scale_y = (height > width) ? scale_y : scale_x;
+    // _img.height = (height > width) ? h : height * scale_y;
+    _img.height = h;
     _img.width = w;
 
     // draw the box with derived dimensions

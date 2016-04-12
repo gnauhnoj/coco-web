@@ -8,7 +8,7 @@ require.config({
 
 var init = false;
 
-angular.module('AngularFlask', ['ngRoute', 'angularFlaskServices', 'angularFlaskFilters'])
+angular.module('AngularFlask', ['ngRoute', 'angularFlaskServices', 'angularFlaskFilters', 'angularFlaskDirectives'])
 .config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider, dataStore) {
   $routeProvider
   .when('/', {
