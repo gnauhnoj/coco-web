@@ -34,11 +34,36 @@ var QuizController = function($scope, dataStore, $document) {
 
 var ImageController = function($scope, $location, dataStore) {
   var segmentation = dataStore.currentData.segmentation;
-
+  $scope.allObjects = null;
   // Get screen width/height
   // play with this
   var w = document.documentElement.clientWidth;
   var h = document.documentElement.clientHeight * 0.75;
+
+  var categories = {};
+  for (var i=0; i<segmentation.length; i++) {
+    categories[segmentation[i].category_name] = categories[segmentation[i].category_name] + 1 || 1;
+  }
+
+  var categoryStr = ['All Objects'];
+  for (var category in categories) {
+    var subStr = [];
+    subStr.push(categories[category], category);
+    categoryStr.push(subStr.join(' '));
+  }
+  categoryStr = categoryStr.join(', ');
+  // console.log(categoryStr);
+  $scope.allObjects = categoryStr;
+  // var button = document.createElement('button');
+  // // TODO: figure out how to deal with annoying text...
+  // var textNode = document.createTextNode('Hover for All Objects');
+  // button.appendChild(textNode);
+  // button.className = 'mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-cell mdl-cell--12-col';
+  // // button.className = 'large expanded button';
+  // button.setAttribute('aria-label', categoryStr);
+  // button.id = 'obj-button';
+  // componentHandler.upgradeElement(button);
+  // document.getElementById('grid').insertBefore(button, document.getElementById('next-button'));
 
   // read in image
   var _img = document.getElementById('id1');
@@ -70,7 +95,6 @@ var ImageController = function($scope, $location, dataStore) {
     newElement.style.fill = '#D3D3D3';
     iarea.appendChild(newElement);
 
-    var categories = {};
     // get captions
     // To make this strawman -- Comment everything in this loop except the last line
     for (var i=0; i<segmentation.length; i++) {
@@ -100,30 +124,7 @@ var ImageController = function($scope, $location, dataStore) {
       pointStr = pointStr.join(' ');
       newElement.setAttribute('points', pointStr);
       sub_svg.appendChild(newElement);
-
-      // build a global list of categories for strawman
-      categories[segmentation[i].category_name] = categories[segmentation[i].category_name] + 1 || 1;
     }
-
-    var categoryStr = ['All Objects'];
-    for (var category in categories) {
-      var subStr = [];
-      subStr.push(categories[category], category);
-      categoryStr.push(subStr.join(' '));
-    }
-    categoryStr = categoryStr.join(', ');
-    // console.log(categoryStr);
-
-    var button = document.createElement('button');
-    // TODO: figure out how to deal with annoying text...
-    var textNode = document.createTextNode('Hover for All Objects');
-    button.appendChild(textNode);
-    button.className = 'mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-cell mdl-cell--12-col';
-    // button.className = 'large expanded button';
-    button.setAttribute('aria-label', categoryStr);
-    button.id = 'obj-button';
-    componentHandler.upgradeElement(button);
-    document.getElementById('grid').insertBefore(button, document.getElementById('next-button'));
   };
 
   // TODO: this is hacked for now - need to change to a link etc with questions
