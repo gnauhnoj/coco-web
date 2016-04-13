@@ -90,7 +90,7 @@ var ImageController = function($scope, $location, dataStore) {
     $location.path('/middle');
   };
 
-  $scope.doStuff = function (value) {//I change here
+  $scope.doStuff = function (value) {
     while( $('#image-note h2').height() > $('.image-note').height() ) {
       $('#image-note h2').css('font-size', (parseInt($('#image-note h2').css('font-size')) - 1) + "px" );
     }
