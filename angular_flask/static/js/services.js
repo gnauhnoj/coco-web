@@ -3,6 +3,7 @@ angular.module('angularFlaskServices', ['ngResource'])
     this.images = null;
     this.captions = null;
     this.results = null;
+    this.indexStore = null;
 
     this.currentImg = null;
     this.currentData = null;
@@ -13,7 +14,6 @@ angular.module('angularFlaskServices', ['ngResource'])
 
     this.shuffleArray = function(array) {
       var m = array.length, t, i;
-
       // While there remain elements to shuffle
       while (m) {
         // Pick a remaining element…
@@ -24,7 +24,6 @@ angular.module('angularFlaskServices', ['ngResource'])
         array[m] = array[i];
         array[i] = t;
       }
-
       return array;
     };
 
@@ -34,11 +33,12 @@ angular.module('angularFlaskServices', ['ngResource'])
       require(['json!./static/img/images.json', 'json!./static/img/captions.json'], function(images, captions) {
         dataStore.images = images;
         dataStore.captions = captions;
-        // create array that is len(images), len(captions)
-        // check to make sure they are the same
-        // shuffle that array
-        // need to keep track of original index as well as array index
-        dataStore.currentIndex = 0;
+        if (images.length !== captions.length) throw 'lengths do not match';
+        dataStore.indexStore = Array.apply(null, Array(images.length)).map(function (_, i) {return i;});
+        dataStore.indexStore = dataStore.shuffleArray(dataStore.indexStore);
+
+        dataStore.dataStoreIndex = 0;
+        dataStore.currentIndex = dataStore.indexStore[0];
 
         // TODO: this is def unnecessary...
         dataStore.currentImg = '/static/img/' + dataStore.images[dataStore.currentIndex].file_name;
@@ -53,13 +53,14 @@ angular.module('angularFlaskServices', ['ngResource'])
     };
 
     this.next = function() {
-      if (dataStore.currentIndex == this.images.length - 1) {
+      if (dataStore.dataStoreIndex == this.images.length - 1) {
         console.log('ending');
         console.log(dataStore.results);
         sendRecord.save(dataStore.results);
         $location.path('/end');
       } else {
-        dataStore.currentIndex++;
+        dataStore.dataStoreIndex++;
+        dataStore.currentIndex = dataStore.indexStore[dataStore.dataStoreIndex];
         dataStore.currentImg = '/static/img/' + dataStore.images[dataStore.currentIndex].file_name;
         dataStore.currentData = dataStore.images[dataStore.currentIndex];
         dataStore.currentCaptions = dataStore.captions[dataStore.currentIndex];
