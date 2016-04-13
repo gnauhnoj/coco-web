@@ -45,7 +45,7 @@ var ImageController = function($scope, $location, dataStore) {
     categories[segmentation[i].category_name] = categories[segmentation[i].category_name] + 1 || 1;
   }
 
-  var categoryStr = ['All Objects'];
+  var categoryStr = [];
   for (var category in categories) {
     var subStr = [];
     subStr.push(categories[category], category);
@@ -116,8 +116,14 @@ var ImageController = function($scope, $location, dataStore) {
     }
   };
 
-  // TODO: this is hacked for now - need to change to a link etc with questions
   $scope.next = function() {
     $location.path('/middle');
+  };
+
+  $scope.doStuff = function (value) {
+    while( $('#image-note h2').height() > $('.image-note').height() ) {
+      $('#image-note h2').css('font-size', (parseInt($('#image-note h2').css('font-size')) - 1) + "px" );
+    }
+    return 0;
   };
 };
