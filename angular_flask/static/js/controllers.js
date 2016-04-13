@@ -52,18 +52,7 @@ var ImageController = function($scope, $location, dataStore) {
     categoryStr.push(subStr.join(' '));
   }
   categoryStr = categoryStr.join(', ');
-  // console.log(categoryStr);
   $scope.allObjects = categoryStr;
-  // var button = document.createElement('button');
-  // // TODO: figure out how to deal with annoying text...
-  // var textNode = document.createTextNode('Hover for All Objects');
-  // button.appendChild(textNode);
-  // button.className = 'mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-cell mdl-cell--12-col';
-  // // button.className = 'large expanded button';
-  // button.setAttribute('aria-label', categoryStr);
-  // button.id = 'obj-button';
-  // componentHandler.upgradeElement(button);
-  // document.getElementById('grid').insertBefore(button, document.getElementById('next-button'));
 
   // read in image
   var _img = document.getElementById('id1');
