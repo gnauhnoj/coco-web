@@ -7,9 +7,8 @@
 <!-- http://www.sitepoint.com/tips-accessible-svg/ -->
 <!-- https://www.paciellogroup.com/blog/2013/12/using-aria-enhance-svg-accessibility/ -->
 <div id= "grid" class="mdl-grid">
-  <!-- {{allObjects}} -->
-  <div id="image-note" class="mdl-card__title image-note">
-    <h2 class="mdl-card__title-text">Explore the image area below through touch.</h2>
+  <div id="image-note" class="image-note">
+    <h2>This image contains: {{ allObjects }}</h2>
   </div>
   <div id="img-area" class="mdl-cell mdl-cell--12-col">
     <svg id="image-area" aria-label="image">
@@ -22,11 +21,4 @@
     Next
   </a> -->
 </div>
-
-<script type="text/javascript">
-$(function() {
-    while( $('#image-note h2').height() > $('.mdl-card__title').height() ) {
-      $('#image-note h2').css('font-size', (parseInt($('#image-note h2').css('font-size')) - 1) + "px" );
-    }
-});
-</script>
+<span ng-show="doStuff()"></span>

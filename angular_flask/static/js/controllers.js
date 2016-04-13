@@ -45,7 +45,7 @@ var ImageController = function($scope, $location, dataStore) {
     categories[segmentation[i].category_name] = categories[segmentation[i].category_name] + 1 || 1;
   }
 
-  var categoryStr = ['All Objects'];
+  var categoryStr = [];
   for (var category in categories) {
     var subStr = [];
     subStr.push(categories[category], category);
@@ -54,16 +54,6 @@ var ImageController = function($scope, $location, dataStore) {
   categoryStr = categoryStr.join(', ');
   // console.log(categoryStr);
   $scope.allObjects = categoryStr;
-  // var button = document.createElement('button');
-  // // TODO: figure out how to deal with annoying text...
-  // var textNode = document.createTextNode('Hover for All Objects');
-  // button.appendChild(textNode);
-  // button.className = 'mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-cell mdl-cell--12-col';
-  // // button.className = 'large expanded button';
-  // button.setAttribute('aria-label', categoryStr);
-  // button.id = 'obj-button';
-  // componentHandler.upgradeElement(button);
-  // document.getElementById('grid').insertBefore(button, document.getElementById('next-button'));
 
   // read in image
   var _img = document.getElementById('id1');
@@ -94,41 +84,16 @@ var ImageController = function($scope, $location, dataStore) {
     // newElement.setAttribute('aria-label', 'image area');
     newElement.style.fill = '#D3D3D3';
     iarea.appendChild(newElement);
-
-    // get captions
-    // To make this strawman -- Comment everything in this loop except the last line
-    for (var i=0; i<segmentation.length; i++) {
-      // for each caption - draw a svg element (labeled with category name)
-      newElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      newElement.setAttribute('role', 'img');
-      var svg_id = 'svg-' + i;
-      newElement.setAttribute('id', svg_id);
-      newElement.setAttribute('aria-label', segmentation[i].category_name);
-      iarea.appendChild(newElement);
-      sub_svg = document.getElementById(svg_id);
-
-      // draw the actual polygon
-      newElement = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-      newElement.style.stroke = '#ffffff';
-      newElement.style['fill-opacity'] = 0;
-      newElement.style['stroke-opacity'] = 0;
-      var pointStr = [];
-      // scale the points according to scale factors
-      for (var j = 0; j < segmentation[i].points.length; j++) {
-        var newx = (segmentation[i].points[j][0] * scale_x);
-        var newy = (segmentation[i].points[j][1] * scale_y);
-        pointStr.push(newx);
-        pointStr.push(newy);
-      }
-      // stringify to put it into html
-      pointStr = pointStr.join(' ');
-      newElement.setAttribute('points', pointStr);
-      sub_svg.appendChild(newElement);
-    }
   };
 
-  // TODO: this is hacked for now - need to change to a link etc with questions
   $scope.next = function() {
     $location.path('/middle');
+  };
+
+  $scope.doStuff = function (value) {//I change here
+    while( $('#image-note h2').height() > $('.image-note').height() ) {
+      $('#image-note h2').css('font-size', (parseInt($('#image-note h2').css('font-size')) - 1) + "px" );
+    }
+    return 0;
   };
 };
