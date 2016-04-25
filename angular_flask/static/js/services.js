@@ -30,7 +30,7 @@ angular.module('angularFlaskServices', ['ngResource'])
     this.init = function() {
       console.log('initing');
       var deferred = $q.defer();
-      require(['json!./static/img/images.json', 'json!./static/img/captions.json'], function(images, captions) {
+      require(['json!./static/img/images2.json', 'json!./static/img/captions2.json'], function(images, captions) {
         dataStore.images = images;
         dataStore.captions = captions;
         if (images.length !== captions.length) throw 'lengths do not match';
