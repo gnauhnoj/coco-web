@@ -32,8 +32,25 @@ var QuizController = function($scope, dataStore, $document) {
   };
 };
 
+var sortCoors = function(a, b) {
+  if (a[1] == b[1]) return a[0] - b[0];
+  return a[1] - b[1];
+};
+
+var sortCoorsMacro = function(a, b) {
+  // maybe should actually sort too
+  var val_a = a.points[0];
+  var val_b = b.points[0];
+  return sortCoors(val_a, val_b);
+};
+
 var ImageController = function($scope, $location, dataStore) {
   var segmentation = dataStore.currentData.segmentation;
+
+  // console.log(segmentation);
+  segmentation.sort(sortCoorsMacro);
+  // console.log(segmentation);
+
   $scope.allObjects = null;
   // Get screen width/height
   // play with this
@@ -41,7 +58,7 @@ var ImageController = function($scope, $location, dataStore) {
   var h = document.documentElement.clientHeight * 0.75;
 
   var categories = {};
-  for (var i=0; i<segmentation.length; i++) {
+  for (i=0; i<segmentation.length; i++) {
     categories[segmentation[i].category_name] = categories[segmentation[i].category_name] + 1 || 1;
   }
 
