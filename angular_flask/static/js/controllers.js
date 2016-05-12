@@ -39,8 +39,20 @@ var sortCoors = function(a, b) {
 
 var sortCoorsMacro = function(a, b) {
   // maybe should actually sort too
+  // technically this is sort of in the wrong order because segmentation order matters -- can't sort without copying
   var val_a = a.points[0];
+  for (var i = 1; i < a.points.length; i++) {
+    if (sortCoors(val_a, a.points[i]) > 0) {
+      val_a = a.points[i];
+    }
+  }
+
   var val_b = b.points[0];
+  for (var j = 1; j < b.points.length; j++) {
+    if (sortCoors(val_b, b.points[j]) > 0) {
+      val_b = b.points[j];
+    }
+  }
   return sortCoors(val_a, val_b);
 };
 
